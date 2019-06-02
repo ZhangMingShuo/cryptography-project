@@ -1,12 +1,15 @@
 package view;
 
 import algorithm.Caesar;
+import algorithm.RSA;
 import algorithm.Vigenere;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static algorithm.RSA.*;
 import static utils.UtilChar.toChar;
 
 public class MyJFrame extends JFrame implements ActionListener {
@@ -24,6 +27,8 @@ public class MyJFrame extends JFrame implements ActionListener {
     private JButton button_vige_encrypt;
     private JButton button_vige_decrypt;
     private JButton button_vige_crack;
+    private JButton button_rsa_encrypt;
+    private JButton button_rsa_decrypt;
     private Caesar caesar;
 
     public MyJFrame(){
@@ -54,7 +59,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         panelPlain.add(jp2);
 
 //        //component2:panel
-        JPanel panel = new JPanel(new GridLayout(6,1));
+        JPanel panel = new JPanel(new GridLayout(8,1));
         container.add(panel);
 
         textKey = new JTextField(1);
@@ -87,6 +92,14 @@ public class MyJFrame extends JFrame implements ActionListener {
         button_vige_crack = new JButton("维吉尼亚破解");
         button_vige_crack.addActionListener(this);
         panel.add(button_vige_crack);
+
+        button_rsa_encrypt = new JButton("RSA加密");
+        button_rsa_encrypt.addActionListener(this);
+        panel.add(button_rsa_encrypt);
+
+        button_rsa_decrypt = new JButton("RSA解密");
+        button_rsa_decrypt.addActionListener(this);
+        panel.add(button_rsa_decrypt);
 
         //component3:textCipher
         JPanel panelCipher = new JPanel(new GridLayout(2,1));
@@ -199,6 +212,36 @@ public class MyJFrame extends JFrame implements ActionListener {
             textHistoryPlain.append("plaintext"+number+":\n"+String.valueOf(plaintext)+"\n\n");
             textHistoryCipher.append("cipher"+number+":\n"+cipherStr+"\n\n");
             //v.crack(cipher);
+        }else if(trigger==button_rsa_encrypt){
+            char []p = "885320963".toCharArray();
+            char []q = "238855417".toCharArray();
+            RSA r = new RSA(p,q,"1001".toCharArray());
+            String aLine =  textPlain.getText();
+            char[] plaintext = toChar(aLine);
+            long []cipher = encrypt(plaintext,getE(),getN());
+            textHistoryCipher.append("cipher"+number+":\n");
+            textCipher.setText("");
+            for(int i=0;i<cipher.length;i++){
+                textHistoryCipher.append(cipher[i] +" ");
+                textCipher.append(cipher[i] +" ");
+            }
+            textHistoryCipher.append("\n\n");
+            textHistoryPlain.append("plaintext"+number+":\n"+aLine+"\n\n");
+        }else if(trigger==button_rsa_decrypt){
+            char []p = "885320963".toCharArray();
+            char []q = "238855417".toCharArray();
+            RSA r = new RSA(p,q,"1001".toCharArray());
+            String aLine =  textCipher.getText();
+            String []lines = aLine.split(" ");
+            long []cipher = new long[lines.length];
+            for(int i=0;i<lines.length;i++){
+                cipher[i] = Long.parseLong(lines[i]);
+            }
+            char[]plaintext = decrypt(cipher,getD(),getN());
+            textHistoryPlain.append("plaintext"+number+":\n"+String.valueOf(plaintext)+"\n\n");
+            textPlain.setText("");
+            textPlain.append(String.valueOf(plaintext));
+            textHistoryCipher.append("cipher"+number+":\n"+aLine+"\n\n");
         }
         this.number++;
     }

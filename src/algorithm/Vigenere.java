@@ -190,14 +190,13 @@ public class Vigenere {
 
         new MyJFrame();
         //Vigenere v = new Vigenere();
-
-//        Scanner sc = new Scanner(System.in);
-//        String plaintext = sc.nextLine();
-//        char []s = toChar(plaintext);
-//        char[] key = toChar(sc.next());
-//        System.out.println(v.encrypt(s,key));
-//        char cipher[] = v.encrypt(s,key);
-//        System.out.println(v.decrypt(cipher,key));
-//        crack(cipher);
+        //Scanner sc = new Scanner(System.in);
+        //String plaintext = sc.nextLine();
+        //char []s = toChar(plaintext);
+        //        char[] key = toChar(sc.next());
+        //        System.out.println(v.encrypt(s,key));
+        //        char cipher[] = v.encrypt(s,key);
+        //        System.out.println(v.decrypt(cipher,key));
+        //        crack(cipher);
     }
 }
