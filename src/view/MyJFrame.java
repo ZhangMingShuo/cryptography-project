@@ -34,7 +34,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     public MyJFrame(){
 
         //1.title,location,size,layout
-        super("信息安全实验");
+        super("密码算法演示软件");
         caesar = new Caesar();
         //this.setBounds(300,200,360,200);
         this.setBounds(500,500,1210,400);

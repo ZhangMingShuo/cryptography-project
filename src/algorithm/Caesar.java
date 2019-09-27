@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 import static utils.UtilChar.toChar;
 
-//感谢这篇博客帮助我解决了Window和Linux互拷之后的编译java文件汉字乱码问题
-//https://blog.csdn.net/gatieme/article/details/55045883
 public class Caesar {
     private static int v;//模式 0:加密 1:解密
 	/**
